@@ -11,16 +11,15 @@ case "$1" in
     run)
         docker run -it --rm \
             --name robotics_intro \
-            --gpus all \
-            --env="QT_X11_NO_MITSHM=1" \
-            --env="DISPLAY" \
-            -v "$XSOCK:$XSOCK:rw" \
-            -v "$XAUTH:$XAUTH:rw" \
-            -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-            -v "$(pwd)":/opt/ws/src/code \
-            --env="XAUTHORITY=$XAUTH" \
-            robotics_intro
-        ;;
+             --env="QT_X11_NO_MITSHM=1" \
+             --env="DISPLAY" \
+             -v "$XSOCK:$XSOCK:rw" \
+             -v "$XAUTH:$XAUTH:rw" \
+         -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+             -v "$(pwd)":/opt/ws/src/code \
+             --env="XAUTHORITY=$XAUTH" \
+             robotics_intro
+         ;;
     bash)
         docker exec -it -w /opt/ws robotics_intro bash -c "source /opt/ros/jazzy/setup.bash && source install/setup.bash 2>/dev/null || true; exec bash"
         ;;
